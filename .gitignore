@@ -1,0 +1,16 @@
+
+\.idea/
+
+paramount_etl/paramount_etl/__pycache__/
+
+paramount_etl/main/migrations/
+
+paramount_etl/main/__pycache__/
+
+paramount_etl/csv_etl/migrations/
+
+paramount_etl/csv_etl/__pycache__/
+
+libs/__pycache__/
+
+paramount_etl/db\.sqlite3
