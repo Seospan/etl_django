@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-STATIC_ROOT = "/work/Paramount/paramount_etl/static"
+STATIC_ROOT = "/work/Paramount/etl_django/paramount_etlstatic"
 
 
 # Application definition
