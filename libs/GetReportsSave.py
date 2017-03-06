@@ -36,7 +36,6 @@ for dataSource in DataSource.objects.all():
 
     out_folder = dataSource.out_directory
 
-    #ind if FTP or Mail retrieval method
     is_mail = False
     is_ftp = False
     try:
@@ -55,8 +54,28 @@ for dataSource in DataSource.objects.all():
         #local folder : remove first slash
         local_folder = os.path.join(data_path, out_folder.strip('/'))
         print("Retrieve method : ftp, folder : " + ftp_folder + ", going to " + local_folder)
-
-        os.system('lftp - e "set ftp:ssl-allow false; mirror /www ../Data; quit" 37.59.31.134 - u paramount_reporting,pMnt022017!')
+        ftp.cwd(ftp_folder)
+        ftp.dir()
+        print("get list file ftp")
+        linesdir = ftp.nlst()
+        print("checking directory "+local_folder)
+        if not os.path.exists(local_folder):
+            print("creating "+local_folder)
+            os.makedirs(local_folder)
+        os.chdir(local_folder)
+        print("get files delivery")
+        for line in linesdir:
+            filename = line
+            print(line)
+            file = FileConversion.objects.filter(name=filename)
+            if len(file) == 0:
+                print("put file %s in %s" % (filename, local_folder + filename))
+                ftp.retrbinary("RETR " + filename, open(local_folder + "/" + filename, 'wb').write)
+                print("put file %s in database" % (filename))
+                file = FileConversion(name=filename, path=local_folder, state_process=1)
+                file.save()
+            else:
+                print(filename+" already downloaded")
 
    # print("Folder : " + folder)
     #if RetrieveFtp.objects.get(pk=dataSource.retrieve_method.pk):
