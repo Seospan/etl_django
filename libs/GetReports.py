@@ -56,29 +56,4 @@ for dataSource in DataSource.objects.all():
         local_folder = os.path.join(data_path, out_folder.strip('/'))
         print("Retrieve method : ftp, folder : " + ftp_folder + ", going to " + local_folder)
 
-        os.system('lftp -e "set ftp:ssl-allow false; mirror /www ../Data; quit" '+ftp_host+' -u '+ftp_user+','+ftp_passwd)
-
-   # print("Folder : " + folder)
-    #if RetrieveFtp.objects.get(pk=dataSource.retrieve_method.pk):
-    #    print("Folder : " + RetrieveFtp.objects.get(pk=dataSource.retrieve_method.pk).folder)
-    #for a in RetrieveFtp.objects.filter(pk=dataSource.retrieve_method.pk):
-     #   print("Folder"+a.folder)
-
-#
-#
-#         if len(delivery) == 0:
-#             print("put file %s in %s" % (filename, data_folder + 'Delivery/' + filename))
-#             ftp.retrbinary("RETR " + filename, open(data_folder + 'Delivery/' + filename, 'wb').write)
-#             print("put file %s in database" % (filename))
-#             delivery = Delivery(name=filename, path="Delivery", state_process=1)
-#             delivery.save()
-
-# print("finished")
-#
-#
-# # In[ ]:
-#
-#
-#
-#
-# # In[ ]:
+        os.system('lftp -e "set ftp:ssl-allow false; mirror '+ftp_folder+' ../Data; quit" '+ftp_host+' -u '+ftp_user+','+ftp_passwd)
