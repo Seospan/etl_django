@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.utils import timezone
 # Create your models here.
 
 class RetrieveMethod(models.Model):
@@ -34,7 +35,7 @@ class FileFormatCsv(FileFormat):
         ('en', 'en'),
         ('utf16_LE', 'utf16_LE'),
     )
-    country = models.CharField(max_length=5, choices=CSV_COUNTRY)
+    country = models.CharField(max_length=32, choices=CSV_COUNTRY)
 
 
 class DataSource(models.Model):
@@ -74,7 +75,7 @@ class FileConversion(models.Model):
     name = models.CharField(max_length=256)
     path = models.CharField(max_length=512)
     state_process = models.IntegerField(choices=STATE_CONVERSION, default=0)
-    last_step_date = models.DateTimeField(default=datetime.now())
+    last_step_date = models.DateTimeField(default=timezone.now)
 
     def ___str__(self):
         return self.id + " : " + self.file.name + " : " + self.state_process
