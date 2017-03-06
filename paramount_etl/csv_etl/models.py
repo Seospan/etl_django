@@ -35,7 +35,7 @@ class FileFormatCsv(FileFormat):
         ('en', 'en'),
         ('utf16_LE', 'utf16_LE'),
     )
-    country = models.CharField(max_length=32, choices=CSV_COUNTRY)
+    country = models.CharField(max_length=64, choices=CSV_COUNTRY, verbose_name="Format d'encodage du csv")
 
 
 class DataSource(models.Model):
