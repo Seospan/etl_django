@@ -56,7 +56,7 @@ for dataSource in DataSource.objects.all():
         local_folder = os.path.join(data_path, out_folder.strip('/'))
         print("Retrieve method : ftp, folder : " + ftp_folder + ", going to " + local_folder)
 
-        os.system('lftp -e "set ftp:ssl-allow false; mirror /www ../Data; quit" 37.59.31.134 -u paramount_reporting,pMnt022017!')
+        os.system('lftp -e "set ftp:ssl-allow false; mirror /www ../Data; quit" '+ftp_host+' -u '+ftp_user+','+ftp_passwd)
 
    # print("Folder : " + folder)
     #if RetrieveFtp.objects.get(pk=dataSource.retrieve_method.pk):
