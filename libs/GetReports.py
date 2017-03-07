@@ -34,7 +34,7 @@ print("connection to ftp")
 for dataSource in DataSource.objects.all():
     print("Data source " + dataSource.name +" ( " + str(dataSource.retrieve_method.pk) + " ) ")
 
-    out_folder = dataSource.out_directory
+    #out_folder = dataSource.out_directory
 
     #ind if FTP or Mail retrieval method
     is_mail = False
@@ -53,7 +53,7 @@ for dataSource in DataSource.objects.all():
         print("Retrieve method : mail, search string : "+search_string)
     if is_ftp :
         #local folder : remove first slash
-        local_folder = os.path.join(data_path, out_folder.strip('/'))
+        local_folder = os.path.join(data_path, ftp_folder.strip('/'))
         print("Retrieve method : ftp, folder : " + ftp_folder + ", going to " + local_folder)
 
         os.system('lftp -e "set ftp:ssl-allow false; mirror '+ftp_folder+' '+local_folder+'; quit" '+ftp_host+' -u '+ftp_user+','+ftp_passwd)
