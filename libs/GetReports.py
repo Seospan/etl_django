@@ -55,6 +55,6 @@ for dataSource in DataSource.objects.all():
         #local folder : remove first slash
         local_folder = os.path.join(data_path, ftp_folder.strip('/'))
         origin_folder = os.path.join(server_path_root, ftp_folder.strip('/'))
-        print("Retrieve method : ftp, folder : " + server_path_root + ", going to " + local_folder)
+        print("Retrieve method : ftp, folder : " + origin_folder + ", going to " + local_folder)
 
-        os.system('lftp -e "set ftp:ssl-allow false; mirror '+server_path_root+' '+local_folder+'; quit" '+ftp_host+' -u '+ftp_user+','+ftp_passwd)
+        os.system('lftp -e "set ftp:ssl-allow false; mirror '+origin_folder+' '+local_folder+'; quit" '+ftp_host+' -u '+ftp_user+','+ftp_passwd)
