@@ -55,12 +55,16 @@ class DataSource(models.Model):
         return self.id + " : " + self.file.name + " : " + self.state_process
 
 
+class ColumnName(models.Model):
+    name = models.CharField(max_length=256)
+
+
 class Column(models.Model):
     TYPE_TRANSFORM = (
         ('r_func','name'),
     )
     old_name = models.CharField(max_length=128)
-    new_name = models.CharField(max_length=128)
+    new_name = models.ForeignKey(ColumnName)
     type_transform = models.CharField(max_length=512, choices=TYPE_TRANSFORM)
     data_source = models.ForeignKey(DataSource)
 

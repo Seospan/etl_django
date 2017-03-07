@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import RetrieveFtp, RetrieveMail, FileFormatCsv, FileFormatXls, DataSource, Column, FileConversion
+from .models import RetrieveFtp, RetrieveMail, FileFormatCsv, FileFormatXls, DataSource, Column, FileConversion, ColumnName
 
 
 @admin.register(RetrieveFtp)
@@ -20,6 +20,11 @@ class FileFormatCsvAdmin(admin.ModelAdmin):
 @admin.register(FileFormatXls)
 class FileFormatXlsAdmin(admin.ModelAdmin):
     list_display = ('name', 'tab_name')
+
+
+@admin.register(ColumnName)
+class ColumnNameAdmin(admin.ModelAdmin):
+    list_display = ('name',)
 
 
 class ColumnAdminInline(admin.TabularInline):
