@@ -1,3 +1,5 @@
+#Dossier root du ftp (www)
+server_path_root = "www"
 path_program = "./"
 path_paramount="../paramount_etl/"
 data_path = "../Data/"

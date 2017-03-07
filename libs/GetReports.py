@@ -8,7 +8,7 @@ import os
 import os
 import sys
 import django
-from libs_settings import path_paramount, path_program, data_path, ftp_host, ftp_user, ftp_passwd
+from libs_settings import path_paramount, path_program, data_path, ftp_host, ftp_user, ftp_passwd, server_path_root
 from django.core.exceptions import ObjectDoesNotExist
 
 os.chdir(path_program)
@@ -54,6 +54,7 @@ for dataSource in DataSource.objects.all():
     if is_ftp :
         #local folder : remove first slash
         local_folder = os.path.join(data_path, ftp_folder.strip('/'))
-        print("Retrieve method : ftp, folder : " + ftp_folder + ", going to " + local_folder)
+        origin_folder = os.path.join(server_path_root, ftp_folder.strip('/'))
+        print("Retrieve method : ftp, folder : " + server_path_root + ", going to " + local_folder)
 
         os.system('lftp -e "set ftp:ssl-allow false; mirror '+ftp_folder+' '+local_folder+'; quit" '+ftp_host+' -u '+ftp_user+','+ftp_passwd)

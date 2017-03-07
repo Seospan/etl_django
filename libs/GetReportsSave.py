@@ -8,7 +8,7 @@ import os
 import os
 import sys
 import django
-from libs_settings import path_paramount, path_program, data_path, ftp_host, ftp_user, ftp_passwd
+from libs_settings import path_paramount, path_program, data_path, ftp_host, ftp_user, ftp_passwd, server_path_root
 from django.core.exceptions import ObjectDoesNotExist
 
 os.chdir(path_program)
