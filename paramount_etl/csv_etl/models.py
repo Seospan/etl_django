@@ -2,6 +2,7 @@
 from django.db import models
 from datetime import datetime
 from django.utils import timezone
+from exclusivebooleanfield.fields import ExclusiveBooleanField
 # Create your models here.
 
 class RetrieveMethod(models.Model):
@@ -70,6 +71,7 @@ class Column(models.Model):
     new_name = models.ForeignKey(ColumnName)
     type_transform = models.CharField(max_length=512, choices=TYPE_TRANSFORM)
     data_source = models.ForeignKey(DataSource)
+    is_adname_container = ExclusiveBooleanField(on=('data_source'), verbose_name="Colonn econtenant l'adname entre '__'")
 
 
 class FileConversion(models.Model):
