@@ -58,6 +58,9 @@ class DataSource(models.Model):
 class ColumnName(models.Model):
     name = models.CharField(max_length=256)
 
+    def __str__(self):
+        return self.name
+
 
 class Column(models.Model):
     TYPE_TRANSFORM = (
