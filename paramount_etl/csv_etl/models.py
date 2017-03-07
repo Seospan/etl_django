@@ -11,7 +11,7 @@ class RetrieveMethod(models.Model):
 
 
 class RetrieveFtp(RetrieveMethod):
-    folder = models.CharField(max_length=512, verbose_name="Dossier ou le rapport est envoye sur le ftp")
+    folder = models.CharField(max_length=512, verbose_name=u"Dossier ou le rapport est envoyé sur le ftp")
 
 
 class RetrieveMail(RetrieveMethod):
@@ -43,7 +43,7 @@ class DataSource(models.Model):
     r_function = models.CharField(max_length=512, null=True, blank=True, verbose_name="R function to use", help_text='Leave blank to use default function.')
     retrieve_method = models.ForeignKey(RetrieveMethod)
     file_format = models.ForeignKey(FileFormat)
-    out_directory = models.CharField(max_length=256, verbose_name="Dossier d'export aprèqs traitement")
+    out_directory = models.CharField(max_length=256, verbose_name=u"Dossier d'export après traitement")
     lines_to_delete_start = models.IntegerField(default=0)
     lines_to_delete_end = models.IntegerField(default=0)
     date_format_input = models.CharField(max_length=128)
