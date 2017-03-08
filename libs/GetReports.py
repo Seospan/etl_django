@@ -62,7 +62,7 @@ for dataSource in DataSource.objects.all():
         print("Listing files in "+local_folder)
         files_list = os.listdir(local_folder)
         print(files_list)
-        folder_regexp = r"^/*"+ftp_folder+"/*$"
+        folder_regexp = r"^/*"+ftp_folder.strip('/')+"/*$"
         print("Listing files in database for path " + folder_regexp)
-        for file in FileConversion.objects.all().filter(path__regex=r"^/*adwords/*$"):
+        for file in FileConversion.objects.all().filter(path__regex=folder_regexp):
             print(file.name)
