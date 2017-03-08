@@ -13,7 +13,7 @@ class RetrieveMethod(models.Model):
 
 
 class RetrieveFtp(RetrieveMethod):
-    folder = models.CharField(max_length=512, verbose_name="Dossier ou le rapport est envoyé sur le ftp")
+    folder = models.CharField(max_length=512, verbose_name="Dossier ou le rapport est envoyé sur le ftp", help_text="Ne pas inclure /www dans le chemin")
 
 
 class RetrieveMail(RetrieveMethod):
