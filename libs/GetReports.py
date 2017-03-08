@@ -68,6 +68,6 @@ for dataSource in DataSource.objects.all():
         print("    "+str(len(files_to_add))+" new  files to add to DB for "+ftp_folder.strip('/'))
         for file in files_to_add:
             print("      "+"Adding to DB : "+file+" from path "+ftp_folder.strip('/'))
-            conversion = FileConversion(name=file,path=ftp_folder.strip('/'),state_process=0)
+            conversion = FileConversion(name=file, data_source=dataSource, path=ftp_folder.strip('/'),state_process=0)
             conversion.save()
 
