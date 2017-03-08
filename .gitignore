@@ -1,6 +1,8 @@
 
 \.idea/
 
+Data/*
+
 paramount_etl/paramount_etl/__pycache__/
 
 paramount_etl/main/migrations/
@@ -15,3 +17,5 @@ libs/__pycache__/
 
 paramount_etl/db\.sqlite3
 .Rproj.user
+
+*/.Rproj*
