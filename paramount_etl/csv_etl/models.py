@@ -52,8 +52,8 @@ class DataSource(models.Model):
     date_format_output = models.CharField(max_length=128)
     #columns
 
-    def ___str__(self):
-        return self.pk + " : " + self.name
+    def __str__(self):
+        return str(self.pk) + " : " + self.name
 
 
 class ColumnName(models.Model):
@@ -88,5 +88,5 @@ class FileConversion(models.Model):
     last_step_date = models.DateTimeField(default=timezone.now)
     data_source = models.ForeignKey(DataSource)
 
-    def ___str__(self):
+    def __str__(self):
         return self.pk + " : " + self.name + " : " + self.state_process
