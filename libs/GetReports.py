@@ -58,3 +58,6 @@ for dataSource in DataSource.objects.all():
         print("Retrieve method : ftp, folder : " + origin_folder + ", going to " + local_folder)
 
         os.system('lftp -e "set ftp:ssl-allow false; mirror --verbose '+origin_folder+' '+local_folder+'; quit" '+ftp_host+' -u '+ftp_user+','+ftp_passwd)
+
+        print("Listing files and comparing to "+local_folder)
+        os.listdir(local_folder)
