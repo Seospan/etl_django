@@ -89,4 +89,4 @@ class FileConversion(models.Model):
     data_source = models.ForeignKey(DataSource)
 
     def __str__(self):
-        return str(self.pk) + " : " + self.name + " : " + self.state_process
+        return str(self.pk) + " : " + self.name + " : " + str(self.state_process)
