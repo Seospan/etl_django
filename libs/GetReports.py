@@ -65,5 +65,4 @@ for dataSource in DataSource.objects.all():
         folder_regexp = r"^/*"+ftp_folder+"/*$"
         print("Listing files in database for path " + folder_regexp)
         for file in FileConversion.objects.all().filter(path__regex=folder_regexp):
-            if file.name in files_list
             print(file.name)
