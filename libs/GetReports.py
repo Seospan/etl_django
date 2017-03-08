@@ -66,6 +66,7 @@ for dataSource in DataSource.objects.all():
         print("Listing files in database for path " + folder_regexp)
         db_files_for_source = map(str,FileConversion.objects.values_list("name", flat=True).filter(path__regex=folder_regexp))
         files_to_add = list(set(files_in_folder_list) - set(db_files_for_source))
+        print(len(files_to_add)+" new  files to add to DB for "+ftp_folder.strip('/'))
         for file in files_to_add:
             print("Adding to DB : "+file+" from path "+ftp_folder.strip('/'))
             conversion = FileConversion(name=file,path=ftp_folder.strip('/'),state_process=0)
