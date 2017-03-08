@@ -53,7 +53,7 @@ class DataSource(models.Model):
     #columns
 
     def ___str__(self):
-        return self.id + " : " + self.file.name + " : " + self.state_process
+        return self.id + " : " + self.name
 
 
 class ColumnName(models.Model):
@@ -89,4 +89,4 @@ class FileConversion(models.Model):
     data_source = models.ForeignKey(DataSource)
 
     def ___str__(self):
-        return self.id + " : " + self.file.name + " : " + self.state_process
+        return self.id + " : " + self.name + " : " + self.state_process
