@@ -67,5 +67,5 @@ for dataSource in DataSource.objects.all():
         db_files_for_source = map(str,FileConversion.objects.values_list("name", flat=True).filter(path__regex=folder_regexp))
         for a in db_files_for_source:
             print("List : "+a)
-        files_to_add = set(files_in_folder_list) - set(db_files_for_source)
+        files_to_add = list(set(files_in_folder_list) - set(db_files_for_source))
         print("Files to add to DB : "+files_to_add)
