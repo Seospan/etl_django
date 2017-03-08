@@ -76,7 +76,7 @@ class Column(models.Model):
 
 class FileConversion(models.Model):
     STATE_CONVERSION = (
-        (0, 'Step 1'),
+        (0, 'On server'),
         (1, 'Step 2'),
         (2, 'Step 3'),
         (3, 'Step 4'),
