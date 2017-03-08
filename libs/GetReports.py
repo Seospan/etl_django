@@ -62,5 +62,5 @@ for dataSource in DataSource.objects.all():
         print("Listing files in "+local_folder)
         files_list = os.listdir(local_folder)
         print(files_list)
-
+        print("Listing files in database")
         print(FileConversion.objects.all())
