@@ -14,3 +14,4 @@ paramount_etl/csv_etl/__pycache__/
 libs/__pycache__/
 
 paramount_etl/db\.sqlite3
+.Rproj.user

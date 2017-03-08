@@ -86,6 +86,7 @@ class FileConversion(models.Model):
     path = models.CharField(max_length=512)
     state_process = models.IntegerField(choices=STATE_CONVERSION, default=0)
     last_step_date = models.DateTimeField(default=timezone.now)
+    data_source = models.ForeignKey(DataSource)
 
     def ___str__(self):
         return self.id + " : " + self.file.name + " : " + self.state_process
