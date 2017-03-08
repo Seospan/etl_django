@@ -83,7 +83,6 @@ class FileConversion(models.Model):
         (4, 'Step 5'),
     )
     name = models.CharField(max_length=256)
-    path = models.CharField(max_length=512)
     state_process = models.IntegerField(choices=STATE_CONVERSION, default=0)
     last_step_date = models.DateTimeField(default=timezone.now)
     data_source = models.ForeignKey(DataSource)
