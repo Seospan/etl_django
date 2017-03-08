@@ -32,7 +32,7 @@ print("connection to ftp")
 
 
 for dataSource in DataSource.objects.all():
-    print("Data source " + dataSource.name +" ( " + str(dataSource.retrieve_method.pk) + " ) ")
+    print(">>Data source " + dataSource.name +" ( " + str(dataSource.retrieve_method.pk) + " ) ")
 
     #out_folder = dataSource.out_directory
 
