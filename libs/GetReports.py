@@ -34,7 +34,7 @@ nb_data_source = len(DataSource.objects.all())
 i = 0
 for dataSource in DataSource.objects.all():
     i=i+1
-    print(i+"/"+str(nb_data_source)+" Data source " + dataSource.name +" ( " + str(dataSource.retrieve_method.pk) + " ) ")
+    print(str(i)+"/"+str(nb_data_source)+" Data source " + dataSource.name +" ( " + str(dataSource.retrieve_method.pk) + " ) ")
 
     #out_folder = dataSource.out_directory
 
