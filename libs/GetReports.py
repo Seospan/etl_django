@@ -30,9 +30,11 @@ print("connection to ftp")
 # ftp.dir()
 #ftp.cwd('www')
 
-
+nb_data_source = len(DataSource.objects.all())
+i = 0
 for dataSource in DataSource.objects.all():
-    print("Data source " + dataSource.name +" ( " + str(dataSource.retrieve_method.pk) + " ) ")
+    i=i+1
+    print(str(i)+"/"+str(nb_data_source)+" Data source " + dataSource.name +" ( " + str(dataSource.retrieve_method.pk) + " ) ")
 
     #out_folder = dataSource.out_directory
 
@@ -50,21 +52,22 @@ for dataSource in DataSource.objects.all():
             raise Exception("No Retrieve Object found (FTP or Mail)")
 
     if is_mail :
-        print("Retrieve method : mail, search string : "+search_string)
+        print("  Retrieve method : mail, search string : "+search_string)
     if is_ftp :
         #local folder : remove first slash
         local_folder = os.path.join(data_path, ftp_folder.strip('/'))
         origin_folder = os.path.join(server_path_root, ftp_folder.strip('/'))
-        print("Retrieve method : ftp, folder : " + origin_folder + ", going to " + local_folder)
-
+        print("    Retrieve method : ftp, folder : " + origin_folder + ", going to " + local_folder)
         os.system('lftp -e "set ftp:ssl-allow false; mirror --verbose '+origin_folder+' '+local_folder+'; quit" '+ftp_host+' -u '+ftp_user+','+ftp_passwd)
-
-        print("Listing files in "+local_folder)
         files_in_folder_list = os.listdir(local_folder)
-        print(files_in_folder_list)
+        print("    Listing files in "+local_folder+" --> "+str(len(files_in_folder_list))+" files")
         folder_regexp = r"^/*"+ftp_folder.strip('/')+"/*$"
-        print("Listing files in database for path " + folder_regexp)
         db_files_for_source = map(str,FileConversion.objects.values_list("name", flat=True).filter(path__regex=folder_regexp))
+        print("    Listing files in database for path " + folder_regexp+" --> "+str(len(db_files_for_source))+" files")
         files_to_add = list(set(files_in_folder_list) - set(db_files_for_source))
+        print("    "+str(len(files_to_add))+" new  files to add to DB for "+ftp_folder.strip('/'))
         for file in files_to_add:
-            print("Files to add to DB : "+file)
+            print("      "+"Adding to DB : "+file+" from path "+ftp_folder.strip('/'))
+            conversion = FileConversion(name=file,path=ftp_folder.strip('/'),state_process=0)
+            conversion.save()
+
