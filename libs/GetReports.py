@@ -61,8 +61,9 @@ for dataSource in DataSource.objects.all():
         os.system('lftp -e "set ftp:ssl-allow false; mirror --verbose '+origin_folder+' '+local_folder+'; quit" '+ftp_host+' -u '+ftp_user+','+ftp_passwd)
         files_in_folder_list = os.listdir(local_folder)
         print("    Listing files in "+local_folder+" --> "+str(len(files_in_folder_list))+" files")
-        folder_regexp = r"^/*"+ftp_folder.strip('/')+"/*$"
-        db_files_for_source = map(str,FileConversion.objects.values_list("name", flat=True).filter(path__regex=folder_regexp))
+        #folder_regexp = r"^/*"+ftp_folder.strip('/')+"/*$"
+        #db_files_for_source = map(str,FileConversion.objects.values_list("name", flat=True).filter(path__regex=folder_regexp))
+        db_files_for_source = map(str,FileConversion.objects.values_list("name", flat=True).filter(data_source=dataSource))
         print("    Listing files in database for path " + folder_regexp+" --> "+str(len(db_files_for_source))+" files")
         files_to_add = list(set(files_in_folder_list) - set(db_files_for_source))
         print("    "+str(len(files_to_add))+" new  files to add to DB for "+ftp_folder.strip('/'))
