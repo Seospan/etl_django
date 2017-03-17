@@ -45,7 +45,7 @@ class DataSource(models.Model):
     r_function = models.CharField(max_length=512, null=True, blank=True, verbose_name="R function to use", help_text='Leave blank to use default function.')
     retrieve_method = models.ForeignKey(RetrieveMethod)
     file_format = models.ForeignKey(FileFormat)
-    out_directory = models.CharField(max_length=256, verbose_name="Dossier d'export après traitement")
+    dir_name = models.CharField(max_length=256, help_text="Nom du dossier utilisé pour le stockage au sein du dossier d'extract et du dossier de load")
     lines_to_delete_start = models.IntegerField(default=0)
     lines_to_delete_end = models.IntegerField(default=0)
     date_format_input = models.CharField(max_length=128)

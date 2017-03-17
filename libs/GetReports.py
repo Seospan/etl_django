@@ -8,7 +8,7 @@ import os
 import os
 import sys
 import django
-from libs_settings import path_paramount, path_program, data_path, ftp_host, ftp_user, ftp_passwd, server_path_root
+from libs_settings import path_paramount, path_program, extract_root, ftp_host, ftp_user, ftp_passwd, server_path_root
 from django.core.exceptions import ObjectDoesNotExist
 
 os.chdir(path_program)
@@ -43,6 +43,7 @@ for dataSource in DataSource.objects.all():
     is_ftp = False
     try:
         ftp_folder = RetrieveFtp.objects.get(pk=dataSource.retrieve_method.pk).folder
+        extract_dir = dataSource.dir_name
         is_ftp = True
     except ObjectDoesNotExist:
         try:
@@ -55,20 +56,18 @@ for dataSource in DataSource.objects.all():
         print("  Retrieve method : mail, search string : "+search_string)
     if is_ftp :
         #local folder : remove first slash
-        local_folder = os.path.join(data_path, ftp_folder.strip('/'))
+        extract_folder = os.path.join(extract_root, extract_dir.strip('/'))
         origin_folder = os.path.join(server_path_root, ftp_folder.strip('/'))
-        print("    Retrieve method : ftp, folder : " + origin_folder + ", going to " + local_folder)
-        os.system('lftp -e "set ftp:ssl-allow false; mirror --verbose '+origin_folder+' '+local_folder+'; quit" '+ftp_host+' -u '+ftp_user+','+ftp_passwd)
-        files_in_folder_list = os.listdir(local_folder)
-        print("    Listing files in "+local_folder+" --> "+str(len(files_in_folder_list))+" files")
-        #folder_regexp = r"^/*"+ftp_folder.strip('/')+"/*$"
-        #db_files_for_source = map(str,FileConversion.objects.values_list("name", flat=True).filter(path__regex=folder_regexp))
+        print("    Retrieve method : ftp, folder : " + origin_folder + ", going to " + extract_folder)
+        os.system('lftp -e "set ftp:ssl-allow false; mirror --verbose '+origin_folder+' '+extract_folder+'; quit" '+ftp_host+' -u '+ftp_user+','+ftp_passwd)
+        files_in_folder_list = os.listdir(extract_folder)
+        print("    Listing files in "+extract_folder+" --> "+str(len(files_in_folder_list))+" files")
         db_files_for_source = map(str,FileConversion.objects.values_list("name", flat=True).filter(data_source=dataSource))
         print("    Listing files in database for " + dataSource.name +" --> "+str(len(db_files_for_source))+" files")
         files_to_add = list(set(files_in_folder_list) - set(db_files_for_source))
-        print("    "+str(len(files_to_add))+" new  files to add to DB for "+ftp_folder.strip('/'))
+        print("    "+str(len(files_to_add))+" new  files to add to DB for "+extract_dir.strip('/'))
         for file in files_to_add:
-            print("      "+"Adding to DB : "+file+" from path "+ftp_folder.strip('/'))
+            print("      "+"Adding to DB : "+file+" from path "+extract_dir.strip('/'))
             conversion = FileConversion(name=file, data_source=dataSource, state_process=0)
             conversion.save()
 

@@ -33,7 +33,7 @@ class ColumnAdminInline(admin.TabularInline):
 
 @admin.register(DataSource)
 class DataSourceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'file_format', 'retrieve_method', 'r_function', 'out_directory')
+    list_display = ('name', 'file_format', 'retrieve_method', 'r_function', 'dir_name')
     inlines = [ColumnAdminInline, ]
 
 
