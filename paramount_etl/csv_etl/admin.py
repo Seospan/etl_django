@@ -39,7 +39,7 @@ class DataSourceAdmin(admin.ModelAdmin):
 
 @admin.register(FileConversion)
 class FileConversionAdmin(admin.ModelAdmin):
-    list_display = ('name', 'state_process', 'last_step_date', 'data_source')
+    list_display = ('name', 'state_process', 'extract_date', 'last_step_date', 'data_source')
     date_hierarchy = 'last_step_date'
     list_filter = ['state_process', 'data_source']
     date_hierarchy = 'last_step_date'

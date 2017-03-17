@@ -77,7 +77,7 @@ class Column(models.Model):
 class FileConversion(models.Model):
     STATE_CONVERSION = (
         (0, 'On server'),
-        (1, 'Step 2'),
+        (1, 'Processed'),
         (2, 'Step 3'),
         (3, 'Step 4'),
         (4, 'Step 5'),
@@ -85,6 +85,7 @@ class FileConversion(models.Model):
     name = models.CharField(max_length=256)
     state_process = models.IntegerField(choices=STATE_CONVERSION, default=0)
     last_step_date = models.DateTimeField(default=timezone.now)
+    extract_date = models.DateTimeField(default=timezone.now)
     data_source = models.ForeignKey(DataSource)
 
     def __str__(self):
