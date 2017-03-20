@@ -78,9 +78,9 @@ class FileConversion(models.Model):
     STATE_CONVERSION = (
         (0, 'On server'),
         (1, 'Processed'),
-        (2, 'Step 3'),
-        (3, 'Step 4'),
-        (4, 'Step 5'),
+        (2, 'Step 2'),
+        (3, 'Step 3'),
+        (4, 'Step 4'),
     )
     name = models.CharField(max_length=256)
     state_process = models.IntegerField(choices=STATE_CONVERSION, default=0)
