@@ -19,3 +19,5 @@ paramount_etl/db\.sqlite3
 .Rproj.user
 
 */.Rproj*
+
+paramount_etl/paramount_etl/local_settings\.py

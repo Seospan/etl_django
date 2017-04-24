@@ -78,26 +78,12 @@ WSGI_APPLICATION = 'paramount_etl.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
+# see in local_settings
 
-Ip_Postgres = "37.59.31.134"
-
-Port_Postgres = '5432'
-
-DATABASES = {
-    #'default': {
-    #    'ENGINE': 'django.db.backends.sqlite3',
-    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    #}
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'paramount',
-        'USER': 'root',
-        'PASSWORD': 'jJeanAdrien1666',
-        'HOST': Ip_Postgres,
-        'PORT': Port_Postgres,
-        'OPTIONS': {'application_name': 'front_django'}
-    }
-}
+#try:
+from .local_settings import *
+#except ImportError:
+    #pass
 
 
 # Password validation
